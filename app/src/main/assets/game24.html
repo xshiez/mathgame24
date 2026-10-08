@@ -75,6 +75,10 @@
     background:linear-gradient(135deg,#f3f1ff,#e6e1ff);
     box-shadow:0 4px 0 #c9c2ff, 0 6px 12px rgba(150,140,255,.18);
   }
+  .big-level.custom{
+    background:linear-gradient(135deg,#fff9e6,#ffefc4);
+    box-shadow:0 4px 0 #ffd98e, 0 6px 12px rgba(255,200,90,.2);
+  }
   .big-num{
     width:40px;height:40px;border-radius:12px;flex-shrink:0;
     background:linear-gradient(160deg,#ffd6e8,#ffb4d3);color:#fff;
@@ -90,6 +94,11 @@
     text-shadow:0 1px 2px rgba(100,90,200,.35);
     font-size:22px;
   }
+  .big-level.custom .big-num{
+    background:linear-gradient(160deg,#ffdf9e,#f5b942);
+    text-shadow:0 1px 2px rgba(200,140,40,.35);
+    font-size:20px;
+  }
   .big-info{flex:1;min-width:0;}
   .big-name{font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:2px;
             white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -99,6 +108,10 @@
 
   .big-level.more .big-name{ font-size:13px; }
   .big-level.more .big-progress{ font-size:10.5px; }
+  .big-level.custom .big-name{ font-size:13px; }
+  .big-level.custom .big-progress{ font-size:10.5px; }
+  .big-level.more .big-arrow,
+  .big-level.custom .big-arrow{ font-size:16px; color:#a89bff; }
 
   /* ===== 更多关卡：范围按钮列表 ===== */
   .more-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
@@ -129,6 +142,41 @@
                     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .more-btn .mprog{font-size:11px;color:var(--dim);font-weight:700;}
   .more-btn .mcheck{font-size:16px;color:#0f9d76;font-weight:900;flex-shrink:0;}
+
+  /* ===== 自定义关卡列表 ===== */
+  .custom-list{display:flex;flex-direction:column;gap:10px;}
+  .custom-card{
+    display:flex;align-items:center;gap:10px;
+    padding:12px 12px;border-radius:18px;border:none;cursor:pointer;font-family:inherit;
+    background:linear-gradient(135deg,#fff,#fff9e6);
+    box-shadow:0 4px 0 #ffd98e, 0 6px 12px rgba(255,200,90,.16);
+    transition:transform .1s, box-shadow .1s;text-align:left;min-width:0;
+  }
+  .custom-card:active{transform:translateY(3px);box-shadow:0 1px 0 #ffd98e;}
+  .custom-nums{display:flex;gap:5px;flex-shrink:0;}
+  .custom-num{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(160deg,#ffdf9e,#f5b942);
+    color:#fff;font-size:16px;font-weight:900;
+    display:flex;align-items:center;justify-content:center;
+    text-shadow:0 1px 2px rgba(200,140,40,.35);
+  }
+  .custom-info{flex:1;min-width:0;}
+  .custom-name{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:2px;
+               white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .custom-match{font-size:11px;color:var(--dim);font-weight:700;}
+  .custom-del{
+    width:34px;height:34px;border-radius:10px;border:none;flex-shrink:0;
+    background:#fff0f5;color:#f2607f;font-size:16px;font-weight:900;
+    cursor:pointer;font-family:inherit;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .custom-del:active{transform:scale(0.92);}
+
+  .custom-empty{
+    text-align:center;color:var(--dim);font-size:14px;font-weight:700;
+    padding:30px 10px;line-height:1.8;
+  }
 
   /* ===== 小关网格 ===== */
   .sub-levels{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;padding:2px 0;}
@@ -244,7 +292,7 @@
   }
   @keyframes spin{to{transform:rotate(360deg);}}
 
-  /* ===== 设置弹窗 ===== */
+  /* ===== 弹窗 ===== */
   .modal{
     position:fixed;inset:0;background:rgba(75,63,99,.35);z-index:100;
     display:flex;align-items:center;justify-content:center;padding:20px;
@@ -264,7 +312,7 @@
     user-select:text;-webkit-user-select:text;
   }
   .modal-input:focus{border-color:#ffb4d3;box-shadow:0 0 0 4px rgba(255,180,211,.25);}
-  .modal-tip{font-size:11.5px;color:#b9a9c9;line-height:1.5;}
+  .modal-tip{font-size:11.5px;color:#b9a9c9;line-height:1.5;text-align:center;}
   .modal-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   .modal-btn{
     height:48px;border:none;border-radius:16px;font-size:15px;font-weight:900;
@@ -277,6 +325,27 @@
     box-shadow:0 4px 0 #ff8cbb;text-shadow:0 1px 2px rgba(200,100,150,.35);
   }
   .modal-btn.save:active{transform:translateY(3px);box-shadow:0 1px 0 #ff8cbb;}
+
+  .custom-inputs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .custom-input{
+    height:56px;border:2px solid #ffe4f0;border-radius:14px;
+    text-align:center;font-size:24px;font-weight:900;color:var(--ink);
+    background:#fffafd;outline:none;font-family:inherit;
+    user-select:text;-webkit-user-select:text;
+    -moz-appearance:textfield;
+  }
+  .custom-input::-webkit-outer-spin-button,
+  .custom-input::-webkit-inner-spin-button{
+    -webkit-appearance:none;margin:0;
+  }
+  .custom-input:focus{border-color:#ffb4d3;box-shadow:0 0 0 4px rgba(255,180,211,.25);}
+
+  .custom-msg{
+    min-height:20px;text-align:center;font-size:13px;font-weight:800;line-height:1.5;
+  }
+  .custom-msg.ok{color:#0f9d76;}
+  .custom-msg.err{color:#f2607f;}
+  .custom-msg.info{color:#c98a1a;}
 
   @media (min-width:480px){
     .tile{height:110px;}
@@ -320,6 +389,19 @@
       <div class="iconbtn" style="visibility:hidden">·</div>
     </div>
     <div class="more-list" id="moreList"></div>
+  </div>
+
+  <!-- ============ 自定义关卡列表 ============ -->
+  <div id="viewCustom" class="view" hidden>
+    <div class="view-head">
+      <button class="iconbtn" id="backHome3">←</button>
+      <div class="head-center">
+        <div class="head-title">自定义关卡</div>
+        <div class="head-sub" id="customSub">0 个</div>
+      </div>
+      <button class="iconbtn" id="addCustom" title="新建">＋</button>
+    </div>
+    <div class="custom-list" id="customList"></div>
   </div>
 
   <!-- ============ 小关选择 ============ -->
@@ -388,6 +470,25 @@
   </div>
 </div>
 
+<!-- ============ 新建自定义关卡弹窗 ============ -->
+<div class="modal" id="customModal" hidden>
+  <div class="modal-card">
+    <div class="modal-title">✏️ 新建自定义关卡</div>
+    <div class="modal-tip">输入 4 个 1~20 的整数，检查有解后会自动保存</div>
+    <div class="custom-inputs">
+      <input type="number" class="custom-input" id="ci0" min="1" max="20" inputmode="numeric">
+      <input type="number" class="custom-input" id="ci1" min="1" max="20" inputmode="numeric">
+      <input type="number" class="custom-input" id="ci2" min="1" max="20" inputmode="numeric">
+      <input type="number" class="custom-input" id="ci3" min="1" max="20" inputmode="numeric">
+    </div>
+    <div class="custom-msg" id="customMsg"></div>
+    <div class="modal-row">
+      <button class="modal-btn cancel" id="customCancel">取消</button>
+      <button class="modal-btn save" id="customSave">保存并开始</button>
+    </div>
+  </div>
+</div>
+
 <script>
 "use strict";
 
@@ -405,7 +506,7 @@ const INT=x=>norm([x,1]);
 const OPS=[['+',add],['−',sub],['×',mul],['÷',div]];
 const OPMAP={'+':add,'−':sub,'×':mul,'÷':div};
 
-/* ================= 求解器（给提示用） ================= */
+/* ================= 求解器 ================= */
 function solveSteps(list){
   if(list.length===1) return feq(list[0].v,[24,1]) ? [] : null;
   for(let i=0;i<list.length;i++){
@@ -432,7 +533,7 @@ function lastStepSig(nums){
   return last.sym + ':' + pair;
 }
 
-/* ================= 难度评分：最小合并代价 ================= */
+/* ================= 难度评分 ================= */
 const OPS_COST=[['+',add,1],['×',mul,1],['−',sub,2],['÷',div,4]];
 function minCost(nums){
   function go(list){
@@ -541,6 +642,33 @@ function getPool(){
 
 function getLevelNums(level){ return LEVEL_POOL[level-1]; }
 
+function findOriginalLevel(nums){
+  const key = [...nums].sort((a,b)=>a-b).join(',');
+  for(let i=0;i<LEVEL_POOL.length;i++){
+    if(LEVEL_POOL[i].join(',') === key){
+      const big = Math.floor(i / PER_BIG) + 1;
+      const sub = (i % PER_BIG) + 1;
+      return {level:i+1, big, sub};
+    }
+  }
+  return null;
+}
+
+/* ================= 自定义关卡存储 ================= */
+const CUSTOM_KEY = 'game24_custom_v1';
+let customLevels = [];
+try{
+  const s = localStorage.getItem(CUSTOM_KEY);
+  if(s){
+    const arr = JSON.parse(s);
+    if(Array.isArray(arr)) customLevels = arr;
+  }
+}catch(e){ customLevels = []; }
+
+function saveCustomLevels(){
+  try{ localStorage.setItem(CUSTOM_KEY, JSON.stringify(customLevels)); }catch(e){}
+}
+
 /* ================= 音效 ================= */
 let soundOn = true;
 let audioCtx = null;
@@ -619,7 +747,7 @@ function cnNum(n){
 }
 function bigName(b){ return '第'+cnNum(b)+'关'; }
 
-/* ================= 主界面说明文字（可自定义） ================= */
+/* ================= 主界面说明文字 ================= */
 const SUB_KEY='game24_home_sub';
 function defaultSubText(){ return LEVEL_POOL.length+' 道题 · 由易到难'; }
 function getSubText(){
@@ -630,9 +758,11 @@ function getSubText(){
 
 /* ================= 状态 ================= */
 const $=id=>document.getElementById(id);
-const HOME_BIGS=9;
+const HOME_BIGS=10;                // 首页固定展示前 10 关
 let currentLevel=1, currentBig=1;
 let subBackTarget='home';
+let currentIsCustom=false;
+let currentCustomId=null;
 let tiles=[], initialTiles=[], nextId=1;
 let selA=null, selOp=null, undoStack=[], logLines=[];
 let startTime=0, running=false, finished=false;
@@ -642,6 +772,7 @@ let hintSteps, hintIdx=0;
 function showView(name){
   $('viewHome').hidden=(name!=='home');
   $('viewMore').hidden=(name!=='more');
+  $('viewCustom').hidden=(name!=='custom');
   $('viewSub').hidden =(name!=='sub');
   $('viewGame').hidden=(name!=='game');
 }
@@ -674,6 +805,7 @@ function renderHome(){
   const showCount=Math.min(HOME_BIGS, BIG_COUNT);
   for(let b=1;b<=showCount;b++) box.appendChild(makeBigCard(b));
 
+  // 更多关卡（如果有额外大关）
   if(BIG_COUNT>HOME_BIGS){
     const start=HOME_BIGS*PER_BIG+1;
     const end=LEVEL_POOL.length;
@@ -689,6 +821,19 @@ function renderHome(){
     btn.addEventListener('click',()=>{ SFX.tap(); renderMore(); showView('more'); });
     box.appendChild(btn);
   }
+
+  // 自定义关卡
+  const cbtn = document.createElement('button');
+  cbtn.className = 'big-level custom';
+  cbtn.innerHTML =
+    '<div class="big-num">✏️</div>'+
+    '<div class="big-info">'+
+      '<div class="big-name">自定义关卡</div>'+
+      '<div class="big-progress">'+(customLevels.length ? customLevels.length+' 个' : '自己出题')+'</div>'+
+    '</div>'+
+    '<div class="big-arrow">›</div>';
+  cbtn.addEventListener('click',()=>{ SFX.tap(); openCustomList(); });
+  box.appendChild(cbtn);
 }
 
 /* ================= 更多关卡列表 ================= */
@@ -716,8 +861,133 @@ function renderMore(){
   }
 }
 
+/* ================= 自定义关卡列表 ================= */
+function openCustomList(){
+  currentIsCustom=false;
+  showView('custom');
+  renderCustomList();
+}
+
+function renderCustomList(){
+  $('customSub').textContent = customLevels.length ? (customLevels.length+' 个') : '还没有';
+  const box = $('customList');
+  box.innerHTML = '';
+  if(!customLevels.length){
+    const empty = document.createElement('div');
+    empty.className = 'custom-empty';
+    empty.innerHTML = '还没有自定义关卡～<br>点右上角「＋」新建一个吧';
+    box.appendChild(empty);
+    return;
+  }
+  customLevels.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'custom-card';
+
+    const numsBox = document.createElement('div');
+    numsBox.className = 'custom-nums';
+    c.nums.forEach(n => {
+      const nb = document.createElement('div');
+      nb.className = 'custom-num';
+      nb.textContent = n;
+      numsBox.appendChild(nb);
+    });
+    card.appendChild(numsBox);
+
+    const info = document.createElement('div');
+    info.className = 'custom-info';
+    const name = document.createElement('div');
+    name.className = 'custom-name';
+    name.textContent = '自己出题';
+    const match = document.createElement('div');
+    match.className = 'custom-match';
+    const orig = findOriginalLevel(c.nums);
+    match.textContent = orig ? ('对应原有关卡：' + orig.level + ' 关（' + orig.big + '-' + orig.sub + '）') : '原创关卡';
+    info.appendChild(name);
+    info.appendChild(match);
+    card.appendChild(info);
+
+    const del = document.createElement('button');
+    del.className = 'custom-del';
+    del.textContent = '×';
+    del.addEventListener('click', (e) => {
+      e.stopPropagation();
+      SFX.error();
+      customLevels = customLevels.filter(x => x.id !== c.id);
+      saveCustomLevels();
+      renderCustomList();
+    });
+    card.appendChild(del);
+
+    card.addEventListener('click', () => { SFX.tap(); openCustomGame(c.id); });
+    box.appendChild(card);
+  });
+}
+
+/* ================= 新建自定义关卡 ================= */
+function openCustomModal(){
+  for(let i=0;i<4;i++) $('ci'+i).value = '';
+  $('customMsg').textContent = '';
+  $('customMsg').className = 'custom-msg';
+  $('customModal').hidden = false;
+  setTimeout(()=>{ try{ $('ci0').focus(); }catch(e){} }, 60);
+}
+function closeCustomModal(){
+  $('customModal').hidden = true;
+}
+function setCustomMsg(cls, txt){
+  const el = $('customMsg');
+  el.className = 'custom-msg ' + cls;
+  el.textContent = txt;
+}
+
+function trySaveCustom(){
+  const nums = [];
+  for(let i=0;i<4;i++){
+    const v = parseInt($('ci'+i).value, 10);
+    if(!Number.isFinite(v) || v < 1 || v > 20){
+      SFX.error();
+      setCustomMsg('err', '请输入 4 个 1~20 的整数');
+      return;
+    }
+    nums.push(v);
+  }
+  const cost = minCost(nums);
+  if(cost === Infinity){
+    SFX.error();
+    setCustomMsg('err', '这组数字凑不出 24 哦～换一组试试');
+    return;
+  }
+  const orig = findOriginalLevel(nums);
+  const key = [...nums].sort((a,b)=>a-b).join(',');
+  const dup = customLevels.find(c => [...c.nums].sort((a,b)=>a-b).join(',') === key);
+  if(dup){
+    SFX.error();
+    setCustomMsg('info', '这组已经存在了，直接开始玩吧');
+    closeCustomModal();
+    openCustomGame(dup.id);
+    return;
+  }
+
+  const item = {id: Date.now() + '-' + Math.random().toString(36).slice(2,7), nums: nums};
+  customLevels.push(item);
+  saveCustomLevels();
+  SFX.merge();
+
+  if(orig){
+    setCustomMsg('ok', '✓ 已保存 · 对应原有关卡：第 ' + orig.level + ' 关（' + orig.big + '-' + orig.sub + '）');
+  }else{
+    setCustomMsg('ok', '✓ 已保存 · 原创关卡');
+  }
+
+  setTimeout(()=>{
+    closeCustomModal();
+    openCustomGame(item.id);
+  }, 600);
+}
+
 /* ================= 小关网格 ================= */
 function openSub(big){
+  currentIsCustom=false;
   currentBig=Math.max(1, Math.min(big, BIG_COUNT));
   showView('sub');
   renderSub();
@@ -753,16 +1023,28 @@ function renderSub(){
 
 /* ================= 进入游戏 ================= */
 function openGame(level){
+  currentIsCustom=false;
   currentLevel=level;
   currentBig=Math.ceil(level/PER_BIG);
   const sub=((level-1)%PER_BIG)+1;
   $('gameLevelTitle').textContent=currentBig+' - '+sub;
   showView('game');
-  loadLevel(level);
+  loadLevelFromNums(getLevelNums(level));
 }
 
-function loadLevel(lv){
-  const nums=getLevelNums(lv);
+function openCustomGame(id){
+  const c = customLevels.find(x => x.id === id);
+  if(!c) return;
+  currentIsCustom = true;
+  currentCustomId = id;
+  currentLevel = -1;
+  currentBig = -1;
+  $('gameLevelTitle').textContent = '✏️ 自定义';
+  showView('game');
+  loadLevelFromNums(c.nums);
+}
+
+function loadLevelFromNums(nums){
   nextId=1;
   initialTiles=nums.map(v=>({id:nextId++, v:INT(v), label:String(v), isRes:false}));
   startRound();
@@ -841,7 +1123,6 @@ function doMerge(idA,idB,op){
   tiles[ia]=nt;
   tiles.splice(ib,1);
 
-  // 自动选中合并结果
   selA = tiles.length > 1 ? nt.id : null;
   selOp = null;
   SFX.merge();
@@ -854,12 +1135,17 @@ function checkWin(){
   if(tiles.length!==1) return;
   finished=true; running=false;
   if(feq(tiles[0].v,[24,1])){
-    markDone(currentLevel);
+    if(!currentIsCustom){
+      markDone(currentLevel);
+    }
     const used=((performance.now()-startTime)/1000).toFixed(1);
     SFX.win();
     confetti();
     msg('good','🎉 通过！用时 '+used+' 秒');
-    if(currentLevel<LEVEL_POOL.length){
+    if(currentIsCustom){
+      $('nextBtn').textContent='← 返回自定义列表';
+      $('nextBtn').hidden=false;
+    }else if(currentLevel<LEVEL_POOL.length){
       $('nextBtn').textContent='继续下一关 →';
       $('nextBtn').hidden=false;
     }else{
@@ -934,9 +1220,7 @@ function openSettings(){
   $('settingsModal').hidden = false;
   setTimeout(()=>{ try{ $('homeSubInput').focus(); }catch(e){} }, 60);
 }
-function closeSettings(){
-  $('settingsModal').hidden = true;
-}
+function closeSettings(){ $('settingsModal').hidden = true; }
 function saveSettings(){
   const v = $('homeSubInput').value.trim();
   if(v) localStorage.setItem(SUB_KEY, v);
@@ -946,7 +1230,6 @@ function saveSettings(){
   SFX.tap();
 }
 
-// 长按主界面标题（800ms）打开设置
 (function(){
   const titleEl = $('gameTitle');
   let timer = null;
@@ -988,18 +1271,24 @@ $('clear').addEventListener('click',restartRound);
 $('hint').addEventListener('click',hint);
 
 $('nextBtn').addEventListener('click',()=>{
+  if(currentIsCustom){ SFX.tap(); openCustomList(); return; }
   if(currentLevel>=LEVEL_POOL.length) return;
   SFX.levelup();
   openGame(currentLevel+1);
 });
 
-$('backSub').addEventListener('click',()=>{ SFX.tap(); openSub(currentBig); });
+$('backSub').addEventListener('click',()=>{
+  SFX.tap();
+  if(currentIsCustom){ openCustomList(); return; }
+  openSub(currentBig);
+});
 $('backHome').addEventListener('click',()=>{
   SFX.tap();
   if(subBackTarget==='more'){ renderMore(); showView('more'); }
   else { showView('home'); renderHome(); }
 });
 $('backHome2').addEventListener('click',()=>{ SFX.tap(); showView('home'); renderHome(); });
+$('backHome3').addEventListener('click',()=>{ SFX.tap(); showView('home'); renderHome(); });
 
 $('prevPage').addEventListener('click',()=>{
   if(currentBig<=1) return;
@@ -1013,6 +1302,19 @@ $('nextPage').addEventListener('click',()=>{
   currentBig++;
   renderSub();
 });
+
+// 自定义关卡相关
+$('addCustom').addEventListener('click', ()=>{ SFX.tap(); openCustomModal(); });
+$('customCancel').addEventListener('click', ()=>{ SFX.tap(); closeCustomModal(); });
+$('customSave').addEventListener('click', trySaveCustom);
+$('customModal').addEventListener('click', e=>{
+  if(e.target === $('customModal')) closeCustomModal();
+});
+for(let i=0;i<4;i++){
+  $('ci'+i).addEventListener('keydown', e=>{
+    if(e.key === 'Enter'){ e.preventDefault(); trySaveCustom(); }
+  });
+}
 
 document.querySelectorAll('.soundBtn').forEach(b=>{
   b.addEventListener('click',()=>{
